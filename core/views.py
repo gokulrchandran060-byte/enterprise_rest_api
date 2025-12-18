@@ -1,12 +1,13 @@
-print("VIEWS FILE LOADED")
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-from django.shortcuts import render
-
-# Create your views here.
-from django.http import JsonResponse
-
-def health_check(request):
-    return JsonResponse({
-        "status": "ok",
-        "message": "Server is running"
-    })
+class HealthCheckAPIView(APIView):
+    def get(self, request):
+        return Response(
+            {
+                "status": "ok",
+                "message": "Server is running"
+            },
+            status=status.HTTP_200_OK
+        )
