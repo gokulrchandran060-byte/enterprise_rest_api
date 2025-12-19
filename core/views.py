@@ -1,15 +1,17 @@
+print(">>> CORE VIEWS FILE LOADED <<<")
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import EchoSerializer
+
+from .serializers import EchoSerializer, MessageSerializer
+from .models import Message
+
 
 class HealthCheckAPIView(APIView):
     def get(self, request):
         return Response(
-            {
-                "status": "ok",
-                "message": "Server is running"
-            },
+            {"status": "ok", "message": "Server is running"},
             status=status.HTTP_200_OK
         )
 
@@ -28,4 +30,15 @@ class EchoAPIView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class MessageCreateAPIView(APIView):
+    def post(self, request):
+        serializer = MessageSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
