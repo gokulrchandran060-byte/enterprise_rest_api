@@ -8,6 +8,7 @@ from .serializers import EchoSerializer, MessageSerializer
 from .models import Message
 from django.contrib.auth.models import User
 from .serializers import UserRegistrationSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class HealthCheckAPIView(APIView):
     def get(self, request):
@@ -33,7 +34,10 @@ class EchoAPIView(APIView):
         )
 
 
+
 class MessageCreateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         serializer = MessageSerializer(data=request.data)
 
@@ -42,6 +46,8 @@ class MessageCreateAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 from django.contrib.auth.models import User
 from .serializers import UserRegistrationSerializer
@@ -65,3 +71,4 @@ class UserRegistrationAPIView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
