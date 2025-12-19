@@ -9,6 +9,21 @@ from .models import Message
 from django.contrib.auth.models import User
 from .serializers import UserRegistrationSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import BasePermission
+
+class CanViewAllMessages(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.has_perm("core.can_view_all_messages")
+
+class MessageListAPIView(APIView):
+    permission_classes = [CanViewAllMessages]
+
+    def get(self, request):
+        messages = Message.objects.all()
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+
+
 
 class HealthCheckAPIView(APIView):
     def get(self, request):
