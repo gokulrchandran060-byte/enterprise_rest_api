@@ -9,11 +9,13 @@ from .models import Message
 from django.contrib.auth.models import User
 from .serializers import UserRegistrationSerializer
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.permissions import BasePermission
 
-class CanViewAllMessages(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.has_perm("core.can_view_all_messages")
+from django.contrib.auth.models import User
+from .serializers import UserRegistrationSerializer
+from .services.message_service import create_message
+from .responses import success_response
+from .permissions import CanViewAllMessages
+
 
 class MessageListAPIView(APIView):
     permission_classes = [CanViewAllMessages]
@@ -50,22 +52,32 @@ class EchoAPIView(APIView):
 
 
 
+
+
 class MessageCreateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+
+        print("HEADERS:", request.headers)
+        print("AUTH:", request.META.get("HTTP_AUTHORIZATION"))
+        print("USER:", request.user)
+
+
+
         serializer = MessageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        message = create_message(serializer.validated_data["content"])
+        return success_response(
+            MessageSerializer(message).data,
+            status=201
+        )
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
-from django.contrib.auth.models import User
-from .serializers import UserRegistrationSerializer
+
 
 class UserRegistrationAPIView(APIView):
     def post(self, request):
