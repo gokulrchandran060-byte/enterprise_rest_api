@@ -4,17 +4,22 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializers import EchoSerializer, MessageSerializer
-from .models import Message
+
+from core.models import Message
 from django.contrib.auth.models import User
-from .serializers import UserRegistrationSerializer
+
 from rest_framework.permissions import IsAuthenticated
 
 from django.contrib.auth.models import User
-from .serializers import UserRegistrationSerializer
-from .services.message_service import create_message
-from .responses import success_response
-from .permissions import CanViewAllMessages
+
+from core.services.message_service import create_message
+from core.responses import success_response
+from core.permissions import CanViewAllMessages
+from core.serializers import (
+    MessageSerializer,
+    EchoSerializer,
+    UserRegistrationSerializer,
+)
 
 
 class MessageListAPIView(APIView):
