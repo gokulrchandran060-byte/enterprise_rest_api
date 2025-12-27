@@ -5,6 +5,8 @@ from .views import (
     UserRegistrationAPIView,
     MessageCreateAPIView,
     MessageListAPIView,
+    MessageUpdateAPIView,
+    MessageDeleteAPIView,
 )
 
 urlpatterns = [
@@ -13,4 +15,7 @@ urlpatterns = [
     path('register/', UserRegistrationAPIView.as_view()),
     path('messages/', MessageCreateAPIView.as_view()),
     path('messages/all/', MessageListAPIView.as_view()),
+    path('messages/<int:message_id>/', MessageUpdateAPIView.as_view()),
+    path('messages/<int:message_id>/delete/', MessageDeleteAPIView.as_view()),
+
 ]
