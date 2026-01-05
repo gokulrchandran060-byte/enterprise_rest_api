@@ -4,7 +4,7 @@ A production-style REST API built using **Django**, **Django REST Framework**, a
 
 ---
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 - Python
 - Django
@@ -17,7 +17,7 @@ A production-style REST API built using **Django**, **Django REST Framework**, a
 
 ---
 
-## ✨ Features
+##  Features
 
 - Health check API
 - JWT authentication (login & protected APIs)
@@ -33,7 +33,7 @@ A production-style REST API built using **Django**, **Django REST Framework**, a
 
 ---
 
-## 📁 Project Structure (Simplified)
+## Project Structure (Simplified)
 
 ```
 enterprise_rest_api/
@@ -56,7 +56,7 @@ enterprise_rest_api/
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1️⃣ Clone the repository
 ```bash
@@ -108,7 +108,7 @@ python manage.py runserver
 
 ---
 
-## 🔐 Authentication (JWT)
+##  Authentication (JWT)
 
 ### Obtain Access Token
 ```http
@@ -130,7 +130,7 @@ Authorization: Bearer <ACCESS_TOKEN>
 
 ---
 
-## 📡 API Endpoints (v1)
+## API Endpoints (v1)
 
 | Method | Endpoint                          | Description             |
 |------|-----------------------------------|-------------------------|
@@ -143,7 +143,7 @@ Authorization: Bearer <ACCESS_TOKEN>
 
 ---
 
-## 🧪 Minimal API Client
+##  Minimal API Client
 
 A lightweight **HTML, CSS, and JavaScript** client is included to manually test:
 
@@ -155,7 +155,7 @@ This client is intended only for **API validation**, not as a full frontend appl
 
 ---
 
-## 🛡️ Permissions
+##  Permissions
 
 - Authenticated users can create, update, and delete their own messages
 - Admin users (`is_staff=True`) can access admin-only endpoints
@@ -163,7 +163,7 @@ This client is intended only for **API validation**, not as a full frontend appl
 
 ---
 
-## 📊 Logging
+## Logging
 
 - **INFO** → Successful actions (create/update)
 - **WARNING** → Unauthorized access attempts
@@ -171,7 +171,7 @@ This client is intended only for **API validation**, not as a full frontend appl
 
 ---
 
-## 🧠 Key Design Decisions
+##  Key Design Decisions
 
 - Secrets and credentials managed using environment variables
 - PostgreSQL used instead of SQLite for production-style configuration
@@ -180,10 +180,11 @@ This client is intended only for **API validation**, not as a full frontend appl
 
 ---
 
-## 🚀 Status
+##  Status
 
-✔️ Feature-complete  
-✔️ Backend-focused, interview-ready project  
+ Status: Feature-complete (backend-focused)
+  
+ Backend-focused, interview-ready project  
 
 ---
 
